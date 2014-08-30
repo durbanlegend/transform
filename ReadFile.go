@@ -30,6 +30,7 @@ func main() {
 
 	// make a write buffer
 	w := bufio.NewWriter(fo)
+	defer w.Flush()
 
 	start := time.Now()
 	i := 0
@@ -48,6 +49,6 @@ func main() {
 	end := time.Now()
 	delta := end.Sub(start)
 	//fmt.Println("Full transform took”, delta)
-	fmt.Println("Delta is", delta)
+	fmt.Println("Elapsed:", delta)
 	fmt.Println("Value of i is now:", i)
 }

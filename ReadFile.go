@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	f, _ := os.Open("/tmp/dat")
+	f, _ := os.Open("/media/removable/StoreJet25D3/dat/dat")
 	scanner := bufio.NewScanner(f)
 	defer f.Close()
 	for i := 0; i < 5; i++ {
@@ -17,7 +17,7 @@ func main() {
 	}
 
 	// open output file
-	fo, err := os.Create("/tmp/output.txt")
+	fo, err := os.Create("/media/removable/StoreJet25D3/dat/output.txt")
 	if err != nil {
 		panic(err)
 	}

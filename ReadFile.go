@@ -4,12 +4,27 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
 
+type T struct {
+	A int
+	B int
+	C float64
+	D int
+	E float64
+	F string
+	G string
+	H string
+	I string
+	J string
+	K string
+}
+
 func main() {
-	f, _ := os.Open("/media/removable/StoreJet25D3/dat/dat")
+	f, _ := os.Open("/tmp/dat")
 	scanner := bufio.NewScanner(f)
 	defer f.Close()
 	for i := 0; i < 5; i++ {
@@ -17,7 +32,7 @@ func main() {
 	}
 
 	// open output file
-	fo, err := os.Create("/media/removable/StoreJet25D3/dat/output.txt")
+	fo, err := os.Create("/tmp/output.txt")
 	if err != nil {
 		panic(err)
 	}
@@ -32,6 +47,7 @@ func main() {
 	w := bufio.NewWriter(fo)
 	defer w.Flush()
 
+	t := T{}
 	start := time.Now()
 	i := 0
 	for scanner.Scan() {
@@ -41,10 +57,39 @@ func main() {
 		if err := scanner.Err(); err != nil {
 			fmt.Fprintln(os.Stderr, "reading input:", err)
 		}
-		_, err := w.WriteString(strings.Join(strings.Split(scanner.Text(), ","), ";") + "\n")
+		arr := strings.Split(scanner.Text(), "|")
+		i := 0
+		t.A, err = strconv.Atoi(arr[i])
+		i++
+		t.B, err = strconv.Atoi(arr[i])
+		i++
+		t.C, err = strconv.ParseFloat(arr[i], 64)
+		i++
+		t.D, err = strconv.Atoi(arr[i])
+		i++
+		t.E, err = strconv.ParseFloat(arr[i], 64)
+		i++
+		t.F = arr[i]
+		i++
+		t.G = arr[i]
+		i++
+		t.H = arr[i]
+		i++
+		t.I = arr[i]
+		i++
+		t.J = arr[i]
+		i++
+		t.K = arr[i]
+		i++
+		// _` := w.WriteString(strings.Join(strings.Split(scanner.Text(), ","), ";") + "\n")
+		_, err := w.WriteString(fmt.Sprintf("%v\n", t))
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "writing output:", err)
 		}
+		//_, err := w.WriteString("\n")
+		//if err != nil {
+		//	fmt.Fprintln(os.Stderr, "writing output:", err)
+		//}
 	}
 	end := time.Now()
 	delta := end.Sub(start)

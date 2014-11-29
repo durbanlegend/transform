@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -23,7 +24,40 @@ type T struct {
 	K string
 }
 
+// Example of how to use Go's reflection
+// Print the attributes of a Data Model
+func attributes(m interface{}) map[string]reflect.Type {
+	typ := reflect.TypeOf(m)
+	// if a pointer to a struct is passed, get the type of the dereferenced object
+	if typ.Kind() == reflect.Ptr {
+		typ = typ.Elem()
+	}
+
+	// create an attribute data structure as a map of types keyed by a string.
+	attrs := make(map[string]reflect.Type)
+	// Only structs are supported so return an empty result if the passed object
+	// isn't a struct
+	if typ.Kind() != reflect.Struct {
+		fmt.Printf("%v type can't have attributes inspected\n", typ.Kind())
+		return attrs
+	}
+
+	// loop through the struct's fields and set the map
+	for i := 0; i < typ.NumField(); i++ {
+		p := typ.Field(i)
+		if !p.Anonymous {
+			attrs[p.Name] = p.Type
+		}
+	}
+
+	return attrs
+}
+
 func main() {
+	for name, mtype := range attributes(&T{}) {
+		fmt.Printf("Name: %s, Type %s\n", name, mtype.Name())
+	}
+
 	f, _ := os.Open("/tmp/dat")
 	scanner := bufio.NewScanner(f)
 	defer f.Close()
@@ -52,35 +86,39 @@ func main() {
 	i := 0
 	for scanner.Scan() {
 		i++
-		// fmt.Println(scanner.Text()) // Println will add back the final '\n'
-		// fmt.Printf("%q\n", strings.Split(scanner.Text(), ","))
+		if scanner.Err() != nil {
+			fmt.Println(scanner.Err())
+			break
+		}
+		fmt.Println(scanner.Text()) // Println will add back the final '\n'
+		fmt.Printf("%q\n", strings.Split(scanner.Text(), ","))
 		if err := scanner.Err(); err != nil {
 			fmt.Fprintln(os.Stderr, "reading input:", err)
 		}
-		arr := strings.Split(scanner.Text(), "|")
-		i := 0
-		t.A, err = strconv.Atoi(arr[i])
-		i++
-		t.B, err = strconv.Atoi(arr[i])
-		i++
-		t.C, err = strconv.ParseFloat(arr[i], 64)
-		i++
-		t.D, err = strconv.Atoi(arr[i])
-		i++
-		t.E, err = strconv.ParseFloat(arr[i], 64)
-		i++
-		t.F = arr[i]
-		i++
-		t.G = arr[i]
-		i++
-		t.H = arr[i]
-		i++
-		t.I = arr[i]
-		i++
-		t.J = arr[i]
-		i++
-		t.K = arr[i]
-		i++
+		arr := strings.Split(scanner.Text(), ",")
+		j := 0
+		t.A, err = strconv.Atoi(arr[j])
+		j++
+		t.B, err = strconv.Atoi(arr[j])
+		j++
+		t.C, err = strconv.ParseFloat(arr[j], 64)
+		j++
+		t.D, err = strconv.Atoi(arr[j])
+		j++
+		t.E, err = strconv.ParseFloat(arr[j], 64)
+		j++
+		t.F = arr[j]
+		j++
+		t.G = arr[j]
+		j++
+		t.H = arr[j]
+		j++
+		t.I = arr[j]
+		j++
+		t.J = arr[j]
+		j++
+		t.K = arr[j]
+		j++
 		// _` := w.WriteString(strings.Join(strings.Split(scanner.Text(), ","), ";") + "\n")
 		_, err := w.WriteString(fmt.Sprintf("%v\n", t))
 		if err != nil {

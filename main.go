@@ -3,7 +3,8 @@ package main
 import (
 	"flag" // command line option parser
 	// "fmt"
-	"github.com/durbanlegend/transform/ops"
+	//"github.com/durbanlegend/transform/ops"
+	"github.com/durbanlegend/transform/parser"
 )
 
 var Usage = flag.Bool("u", false, "show usage and exit") // echo -u flag, of type *bool
@@ -21,5 +22,6 @@ func main() {
 		return
 	}
 
-	ops.Transform()
+	//ops.Transform()
+	parser.Parse()
 }

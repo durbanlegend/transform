@@ -3,7 +3,7 @@ package main
 import (
 	"flag" // command line option parser
 	// "fmt"
-	//"github.com/durbanlegend/transform/ops"
+	"github.com/durbanlegend/transform/ops"
 	"github.com/durbanlegend/transform/parser"
 )
 
@@ -23,5 +23,10 @@ func main() {
 	}
 
 	//ops.Transform()
-	parser.Parse()
+	//parser.Parse()
+	jsontype := parser.Unmarshal(flag.Arg(0))
+	switch jsontype.Name {
+	case "Transform":
+		ops.Transform(jsontype)
+	}
 }

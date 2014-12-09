@@ -3,6 +3,7 @@ package ops
 import (
 	"bufio"
 	"fmt"
+	"github.com/durbanlegend/transform/parser"
 	"os"
 	"reflect"
 	"strconv"
@@ -53,20 +54,20 @@ func attributes(m interface{}) map[string]reflect.Type {
 	return attrs
 }
 
-func Transform() {
+func Transform(trans parser.Transformation) {
+	//for name, mtype := range attributes(&parser.Transformation{}) {
 	for name, mtype := range attributes(&T{}) {
 		fmt.Printf("Name: %s, Type %s\n", name, mtype.Name())
 	}
 
-	f, _ := os.Open("/tmp/dat")
+	//home := os.Getenv("HOME")
+	//f, _ := os.Open(home + "/dat")
+	f, _ := os.Open(trans.Infile)
 	scanner := bufio.NewScanner(f)
 	defer f.Close()
-	for i := 0; i < 5; i++ {
-		fmt.Println("Value of i is now:", i)
-	}
 
 	// open output file
-	fo, err := os.Create("/tmp/output.txt")
+	fo, err := os.Create(trans.Outfile)
 	if err != nil {
 		panic(err)
 	}

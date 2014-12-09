@@ -42,8 +42,8 @@ func Marshal() {
 	//	Fruits []string `json:"fruits"`
 	//}
 }
-func Unmarshal() {
-	file, e := ioutil.ReadFile("/tmp/config.json")
+func Unmarshal(fileName string) Transformation {
+	file, e := ioutil.ReadFile(fileName)
 	if e != nil {
 		fmt.Printf("File error: %v\n", e)
 		os.Exit(1)
@@ -52,6 +52,5 @@ func Unmarshal() {
 
 	var jsontype Transformation
 	json.Unmarshal(file, &jsontype)
-	fmt.Printf("Results: %v\n", jsontype)
-
+	return jsontype
 }

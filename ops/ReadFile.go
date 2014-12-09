@@ -54,8 +54,8 @@ func attributes(m interface{}) map[string]reflect.Type {
 	return attrs
 }
 
-func Transform(trans parser.Transformation) {
-	//for name, mtype := range attributes(&parser.Transformation{}) {
+func Transform(trans parser.TransType) {
+	//for name, mtype := range attributes(&parser.TransType{}) {
 	for name, mtype := range attributes(&T{}) {
 		fmt.Printf("Name: %s, Type %s\n", name, mtype.Name())
 	}

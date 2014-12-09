@@ -19,8 +19,8 @@ func Marshal() {
 	group := TransType{
 		ID:      1,
 		Name:    "Transform",
-		Infile:  home + "/dat",
-		Outfile: "/tmp/out.dat",
+		Infile:  home + "/dat1",
+		Outfile: "/dev/stdout",
 		//Parms:   []string{"Crimson", "Red", "Ruby", "Maroon", "Scarlet"},
 		Inrec: InrecType{
 			Name: "InRecname",
@@ -99,8 +99,8 @@ func Unmarshal(fileName string) TransType {
 		fmt.Printf("File error: %v\n", e)
 		os.Exit(1)
 	}
-	fmt.Printf("Marshalled file %s:\n", fileName)
-	fmt.Printf("%s\n", string(file))
+	//fmt.Printf("Unmarshalling file %s:\n", fileName)
+	//fmt.Printf("%s\n", string(file))
 
 	var jsontype TransType
 	json.Unmarshal(file, &jsontype)

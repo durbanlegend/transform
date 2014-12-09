@@ -54,15 +54,17 @@ func attributes(m interface{}) map[string]reflect.Type {
 	return attrs
 }
 
-func Transform(trans parser.TransType) {
-	//for name, mtype := range attributes(&parser.TransType{}) {
-	for name, mtype := range attributes(&T{}) {
+func ReadFile(trans parser.TransType) {
+	for name, mtype := range attributes(&parser.TransType{}) {
+		//for name, mtype := range attributes(&T{}) {
 		fmt.Printf("Name: %s, Type %s\n", name, mtype.Name())
 	}
 
-	//home := os.Getenv("HOME")
-	//f, _ := os.Open(home + "/dat")
-	f, _ := os.Open(trans.Infile)
+	f, err := os.Open(trans.Infile)
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
+	}
 	scanner := bufio.NewScanner(f)
 	defer f.Close()
 

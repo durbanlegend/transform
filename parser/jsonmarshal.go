@@ -7,10 +7,12 @@ import (
 	"os"
 )
 
-type ColorGroup struct {
-	ID     int
-	Name   string
-	Colors []string
+type Transformation struct {
+	ID      int
+	Name    string
+	Infile  string
+	Outfile string
+	Parms   []string
 }
 
 func check(e error) {
@@ -19,10 +21,14 @@ func check(e error) {
 	}
 }
 func Marshal() {
-	group := ColorGroup{
-		ID:     1,
-		Name:   "Reds",
-		Colors: []string{"Crimson", "Red", "Ruby", "Maroon"},
+	home := os.Getenv("HOME")
+
+	group := Transformation{
+		ID:      1,
+		Name:    "Transform",
+		Infile:  home + "/dat",
+		Outfile: "/tmp/out.dat",
+		Parms:   []string{"Crimson", "Red", "Ruby", "Maroon", "Scarlet"},
 	}
 	b, err := json.MarshalIndent(group, "", "  ")
 	if err != nil {
@@ -44,7 +50,7 @@ func Unmarshal() {
 	}
 	fmt.Printf("%s\n", string(file))
 
-	var jsontype ColorGroup
+	var jsontype Transformation
 	json.Unmarshal(file, &jsontype)
 	fmt.Printf("Results: %v\n", jsontype)
 

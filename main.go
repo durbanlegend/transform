@@ -7,7 +7,7 @@ import (
 	"github.com/durbanlegend/transform/parser"
 )
 
-var Usage = flag.Bool("u", false, "show usage and exit") // echo -u flag, of type *bool
+var Usage = flag.Bool("u", false, "Show usage and exit") // echo -u flag, of type *bool
 
 const (
 	Space   = " "

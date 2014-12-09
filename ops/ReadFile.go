@@ -134,5 +134,5 @@ func Transform(trans parser.Transformation) {
 	delta := end.Sub(start)
 	//fmt.Println("Full transform took”, delta)
 	fmt.Println("Elapsed:", delta)
-	fmt.Println("Value of i is now:", i)
+	fmt.Println("Rows processed:", i)
 }

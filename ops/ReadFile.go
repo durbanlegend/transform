@@ -3,13 +3,14 @@ package ops
 import (
 	"bufio"
 	"fmt"
-	"github.com/durbanlegend/transform/parser"
 	"math/big"
 	"os"
 	"reflect"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/durbanlegend/transform/parser"
 )
 
 type T struct {
@@ -106,12 +107,11 @@ func ReadFile(trans parser.TransType) {
 		t.B, err = strconv.Atoi(arr[j])
 		j++
 		//t.C, err = strconv.ParseFloat(arr[j], 64)
-		var dummy int
-		dummy, err = fmt.Sscan(arr[j], &t.C)
+		_, err = fmt.Sscan(arr[j], &t.C)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "reading input:", err)
 		} else {
-			fmt.Printf("ReadFile: dummy=%v C=%v\n", dummy, t.C.FloatString(3))
+			fmt.Printf("ReadFile: C=%v\n", t.C.FloatString(3))
 		}
 
 		j++

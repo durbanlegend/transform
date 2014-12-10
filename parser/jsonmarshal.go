@@ -19,8 +19,8 @@ func Marshal() {
 	group := TransType{
 		ID:      1,
 		Name:    "Transform",
-		Infile:  home + "/dat1",
-		Outfile: "/dev/stdout",
+		Infile:  home + "/dat",
+		Outfile: "/tmp/dat",
 		//Parms:   []string{"Crimson", "Red", "Ruby", "Maroon", "Scarlet"},
 		Inrec: InrecType{
 			Name: "InRecname",
@@ -35,7 +35,7 @@ func Marshal() {
 				},
 				{
 					Name: "C",
-					Type: "float64",
+					Type: "big.Rat",
 				},
 
 				{

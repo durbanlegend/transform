@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/durbanlegend/transform/parser"
+	"math/big"
 	"os"
 	"reflect"
 	"strconv"
@@ -14,7 +15,7 @@ import (
 type T struct {
 	A int
 	B int
-	C float64
+	C big.Rat
 	D int
 	E float64
 	F string
@@ -104,7 +105,15 @@ func ReadFile(trans parser.TransType) {
 		j++
 		t.B, err = strconv.Atoi(arr[j])
 		j++
-		t.C, err = strconv.ParseFloat(arr[j], 64)
+		//t.C, err = strconv.ParseFloat(arr[j], 64)
+		var dummy int
+		dummy, err = fmt.Sscan(arr[j], &t.C)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, "reading input:", err)
+		} else {
+			fmt.Printf("ReadFile: dummy=%v C=%v\n", dummy, t.C.FloatString(3))
+		}
+
 		j++
 		t.D, err = strconv.Atoi(arr[j])
 		j++
@@ -123,7 +132,7 @@ func ReadFile(trans parser.TransType) {
 		t.K = arr[j]
 		j++
 		// _` := w.WriteString(strings.Join(strings.Split(scanner.Text(), ","), ";") + "\n")
-		_, err := w.WriteString(fmt.Sprintf("%v\n", t))
+		_, err := w.WriteString(fmt.Sprintf("ReadFile: structure T: %v\n", t))
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "writing output:", err)
 		}

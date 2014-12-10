@@ -111,6 +111,9 @@ func ReadFile(trans parser.TransType) {
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "reading input:", err)
 		} else {
+			// This writes it as numerator/denominator
+			//xx, _ := t.C.MarshalText()
+			//fmt.Printf("ReadFile: C=%v\n", string(xx[:]))
 			fmt.Printf("ReadFile: C=%v\n", t.C.FloatString(3))
 		}
 

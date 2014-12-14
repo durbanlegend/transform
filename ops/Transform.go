@@ -3,8 +3,8 @@ package ops
 import (
 	"bufio"
 	"fmt"
-	"github.com/durbanlegend/transform/parser"
 	"os"
+	"github.com/durbanlegend/transform/parser"
 	//"reflect"
 	//"strconv"
 	"strings"
@@ -71,13 +71,13 @@ func Transform(trans parser.TransType) {
 
 		arr := strings.Split(scanner.Text(), ",")
 
-		j := 0
-		fieldArray := trans.Inrec.Infields
-		fmt.Printf("trans.Infields: %s\n", fieldArray)
-		for pos, infield := range fieldArray {
-			fmt.Printf("Pos: %d, Name: %s, Type: %s, Value %s\n", pos, infield.Name, infield.Type, arr[j])
-			j++
-		}
+		//j := 0
+		//fieldArray := trans.Inrec.Infields
+		//fmt.Printf("trans.Infields: %s\n", fieldArray)
+		//for pos, infield := range fieldArray {
+		//	fmt.Printf("Pos: %d, Name: %s, Type: %s, Value %s\n", pos, infield.Name, infield.Type, arr[j])
+		//	j++
+		//}
 
 		//_, err := w.WriteString(fmt.Sprintf("%v\n", t))
 		_, err := w.WriteString(strings.Join(arr, ",") + "\n")

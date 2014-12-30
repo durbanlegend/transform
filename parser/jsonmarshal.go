@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"reflect"
 )
 
 func check(e error) {
@@ -27,55 +26,55 @@ func Marshal() {
 			Infields: []InfieldsType{
 				{
 					Name: "itemNum",
-					Type: reflect.Int.String(),
+					Type: Integer,
 				},
 				{
 					Name: "siteNum",
-					Type: "int",
+					Type: Integer,
 				},
 				{
 					Name: "C",
-					Type: "big.Rat",
+					Type: Decimal,
 				},
 
 				{
 					Name: "D",
-					Type: "int",
+					Type: Integer,
 				},
 
 				{
 					Name: "E",
-					Type: "float64",
+					Type: Decimal,
 				},
 
 				{
 					Name: "F",
-					Type: "string",
+					Type: String,
 				},
 
 				{
 					Name: "G",
-					Type: "string",
+					Type: String,
 				},
 
 				{
 					Name: "H",
-					Type: "string",
+					Type: String,
 				},
 
 				{
 					Name: "I",
-					Type: "string",
+					Type: String,
 				},
 
 				{
 					Name: "J",
-					Type: "string",
+					Type: String,
 				},
 
 				{
 					Name: "K",
-					Type: "string",
+					Type: String,
 				},
 			},
 		},

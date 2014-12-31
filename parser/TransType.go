@@ -29,11 +29,11 @@ type DataType struct {
 	GoType reflect.Type
 }
 
-type tmpDataType struct {
-	typeName string
-}
+//type tmpDataType struct {
+//	typeName string
+//}
 
-type TypeId int
+type TypeId uint
 
 const (
 	Invalid TypeId = iota
@@ -42,14 +42,33 @@ const (
 	String
 )
 
-var GoTypes = [...]reflect.Type{
+type Enum interface {
+	Name() string
+	Ordinal() int
+	ValueOf() *[]string
+}
+
+func (id TypeId) name() string {
+	return TypeNames[id]
+}
+func (id TypeId) ordinal() int {
+	return int(id)
+}
+func (id TypeId) String() string {
+	return TypeNames[id]
+}
+func (id TypeId) values() *[]string {
+	return &TypeNames
+}
+
+var GoTypes = []reflect.Type{
 	reflect.TypeOf(nil),
 	reflect.TypeOf(1),
 	reflect.TypeOf(*big.NewRat(0, 1)),
 	reflect.TypeOf(``),
 }
 
-var TypeNames = [...]string{
+var TypeNames = []string{
 	"Invalid",
 	"Integer",
 	"Decimal",
@@ -57,10 +76,6 @@ var TypeNames = [...]string{
 }
 
 var typeNameMap = make(map[string]TypeId)
-
-func (t TypeId) String() string {
-	return TypeNames[t]
-}
 
 func GetTypeId(name string) TypeId {
 	return typeNameMap[name]

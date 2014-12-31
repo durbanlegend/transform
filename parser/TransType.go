@@ -1,6 +1,9 @@
 package parser
 
-import "reflect"
+import (
+	"math/big"
+	"reflect"
+)
 
 type TransType struct {
 	ID      int
@@ -26,38 +29,55 @@ type DataType struct {
 	GoType reflect.Type
 }
 
+type tmpDataType struct {
+	typeName string
+}
+
 type TypeId int
 
 const (
-	Unknown TypeId = iota
+	Invalid TypeId = iota
 	Integer
 	Decimal
 	String
 )
 
-// Enums should be able to printout as strings
-// so we declare the next best thing, a slice of strings
-// for eg. the string value will be used in the println
-var GoTypes = [...]reflect.Kind{
-	reflect.Invalid,
-	reflect.Int,
-	reflect.Float64, // TODO replace with big.Rat
-	reflect.String,
+var GoTypes = [...]reflect.Type{
+	reflect.TypeOf(nil),
+	reflect.TypeOf(1),
+	reflect.TypeOf(*big.NewRat(0, 1)),
+	reflect.TypeOf(``),
 }
 
+var TypeNames = [...]string{
+	"Invalid",
+	"Integer",
+	"Decimal",
+	"String",
+}
+
+var typeNameMap = make(map[string]TypeId)
+
 func (t TypeId) String() string {
-	var s string
-	switch t {
-	case Integer:
-		s = "Integer"
-	case Decimal:
-		s = "Decimal"
-	case String:
-		s = "String"
-	case Unknown:
-		s = "Invalid"
-	default:
-		s = "¡Unknown or composed Type!"
+	return TypeNames[t]
+}
+
+func GetTypeId(name string) TypeId {
+	return typeNameMap[name]
+}
+
+func init() {
+	for i, n := range TypeNames {
+		typeNameMap[n] = TypeId(i)
 	}
-	return s
+}
+
+func (id TypeId) MarshalText() ([]byte, error) {
+	return []byte(id.String()), nil
+}
+
+func (id *TypeId) UnmarshalText(text []byte) error {
+	*id = GetTypeId(string(text))
+	//fmt.Printf("string(text)=%v; id=%v\n", string(text), id)
+	return nil
 }

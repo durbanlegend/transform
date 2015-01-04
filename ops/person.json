@@ -1,0 +1,84 @@
+{
+  "ID": 1,
+  "Name": "CacheFile",
+  "Infile": "/home/donf/person.csv",
+  "Outfile": "/tmp/person.db",
+  "Keynames": [ "lastName", "firstName" ],
+  "Inrec": {
+    "Name": "PersonnelRec",
+    "Infields": [
+      {
+        "Name": "id",
+        "Type": "Integer"
+      },
+      {
+        "Name": "firstName",
+        "Type": "String"
+      },
+      {
+        "Name": "lastName",
+        "Type": "String"
+      },
+      {
+        "Name": "email",
+        "Type": "String"
+      },
+      {
+        "Name": "countryName",
+        "Type": "String"
+      },
+      {
+        "Name": "countryCode2",
+        "Type": "String"
+      },
+      {
+        "Name": "countryCode3",
+        "Type": "String"
+      },
+      {
+        "Name": "city",
+        "Type": "String"
+      },
+      {
+        "Name": "stateName",
+        "Type": "String"
+      },
+      {
+        "Name": "stateCode",
+        "Type": "String"
+      },
+      {
+        "Name": "street",
+        "Type": "String"
+      },
+      {
+        "Name": "address",
+        "Type": "String"
+      },
+      {
+        "Name": "int1",
+        "Type": "Integer"
+      },
+      {
+        "Name": "int2",
+        "Type": "Integer"
+      },
+      {
+        "Name": "boolean",
+        "Type": "String"
+      },
+      {
+        "Name": "postCode",
+        "Type": "String"
+      },
+      {
+        "Name": "stringNum",
+        "Type": "String"
+      },
+      {
+        "Name": "ipV4Address",
+        "Type": "String"
+      }
+    ]
+  }
+}

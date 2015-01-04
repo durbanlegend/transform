@@ -1,8 +1,11 @@
 package parser
 
 import (
+	"fmt"
 	"math/big"
+	"os"
 	"reflect"
+	"regexp"
 )
 
 type TransType struct {
@@ -96,4 +99,23 @@ func (id *TypeId) UnmarshalText(text []byte) error {
 	*id = GetTypeId(string(text))
 	//fmt.Printf("string(text)=%v; id=%v\n", string(text), id)
 	return nil
+}
+
+func Resolve(text string) string {
+	//pat := "\\${(\\w+?)}" // pattern search for in searchIn
+	pat := "\\${?(\\w+)}?"
+	var re *regexp.Regexp
+
+	f := func(s string) string {
+		args := re.FindStringSubmatch(s)
+		val := os.Getenv(args[1])
+		fmt.Printf("String=%s; args[1]=%s; val=%s\n", s, args[1], val)
+		return val
+	}
+
+	re = regexp.MustCompile(pat)
+	str := re.ReplaceAllStringFunc(text, f)
+	fmt.Println(str)
+
+	return str
 }

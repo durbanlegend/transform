@@ -25,7 +25,8 @@ func CheckError(err error) {
 // Write file to a leveldb database for later reading
 func CacheFile(trans parser.TransType) {
 
-	f, err := os.Open(trans.Infile)
+	fmt.Println(parser.Resolve(trans.Infile))
+	f, err := os.Open(parser.Resolve(trans.Infile))
 	CheckError(err)
 
 	delim := ";"

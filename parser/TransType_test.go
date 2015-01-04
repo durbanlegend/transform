@@ -28,3 +28,7 @@ func TestTransType(*testing.T) {
 	fmt.Printf("Type of GoTypes=%s\n", reflect.TypeOf(GoTypes))
 
 }
+
+func TestResolve(*testing.T) {
+	fmt.Println(Resolve("~ represents ${HOME}; Go path is $GOPATH"))
+}

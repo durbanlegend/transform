@@ -104,12 +104,14 @@ func (id *TypeId) UnmarshalText(text []byte) error {
 func Resolve(text string) string {
 	//pat := "\\${(\\w+?)}" // pattern search for in searchIn
 	pat := "\\${?(\\w+)}?"
+	//pat := "\\$({(\\w+)}|(\\w+))"
 	var re *regexp.Regexp
 
 	f := func(s string) string {
 		args := re.FindStringSubmatch(s)
+		//fmt.Printf("args=%v\n", args)
 		val := os.Getenv(args[1])
-		fmt.Printf("String=%s; args[1]=%s; val=%s\n", s, args[1], val)
+		//fmt.Printf("String=%s; args[1]=%s; val=%s\n", s, args[1], val)
 		return val
 	}
 

@@ -17,7 +17,7 @@ func TestCacheFile(*testing.T) {
 	home := os.Getenv("HOME")
 
 	jsontype := parser.Unmarshal(home + "/person.json")
-	//CacheFile(jsontype)
+	CacheFile(jsontype)
 
 	fmt.Printf("Unmarshalled %s: %v\n", reflect.TypeOf(jsontype), jsontype)
 	o := &opt.Options{

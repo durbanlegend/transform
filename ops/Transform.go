@@ -40,7 +40,7 @@ func Transform(trans parser.TransType) {
 	w := bufio.NewWriter(fo)
 	defer w.Flush()
 
-	// open output file
+	// open message log
 	fe, err := os.Create("/dev/stderr")
 	if err != nil {
 		panic(err)

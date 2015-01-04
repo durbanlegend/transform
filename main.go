@@ -31,6 +31,8 @@ func main() {
 	}
 	jsontype := parser.Unmarshal(flag.Arg(0))
 	switch jsontype.Name {
+	case "CacheFile":
+		ops.CacheFile(jsontype)
 	case "ReadFile":
 		ops.ReadFile(jsontype)
 	case "Transform":

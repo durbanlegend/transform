@@ -8,6 +8,8 @@ import (
 
 	"github.com/durbanlegend/transform/parser"
 	"github.com/syndtr/goleveldb/leveldb"
+	"github.com/syndtr/goleveldb/leveldb/filter"
+	"github.com/syndtr/goleveldb/leveldb/opt"
 	"github.com/syndtr/goleveldb/leveldb/util"
 )
 
@@ -18,10 +20,10 @@ func TestCacheFile(*testing.T) {
 	//CacheFile(jsontype)
 
 	fmt.Printf("Unmarshalled %s: %v\n", reflect.TypeOf(jsontype), jsontype)
-	//o := &opt.Options{
-	//	Filter: filter.NewBloomFilter(10),
-	//}
-	db, err := leveldb.OpenFile(jsontype.Outfile, nil)
+	o := &opt.Options{
+		Filter: filter.NewBloomFilter(10),
+	}
+	db, err := leveldb.OpenFile(jsontype.Outfile, o)
 	CheckError(err)
 
 	iter := db.NewIterator(nil, nil)

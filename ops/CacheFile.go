@@ -88,6 +88,7 @@ func CacheFile(trans parser.TransType) {
 	err = db.Write(batch, nil)
 	CheckError(err)
 	defer db.Close()
+
 	end := time.Now()
 	delta := end.Sub(start)
 	//fmt.Println("Full transform took”, delta)

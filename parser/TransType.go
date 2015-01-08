@@ -14,8 +14,8 @@ type TransType struct {
 	Infile  string
 	Outfile string
 	// Parms   []string
-	Inrec    InrecType
 	Keynames []string
+	Inrec    InrecType
 }
 
 type InrecType struct {
